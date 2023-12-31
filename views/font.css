@@ -1,0 +1,30 @@
+/* font: import ================================================ */
+
+@font-face {
+  font-family: 'FKGroteskMonoTrial-Regular';
+  src: url('https://toolsupsidedown.com/font/FKGroteskMonoTrial-Regular.woff') format('woff');
+  src: url('https://toolsupsidedown.com/font/FKGroteskMonoTrial-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'FKGroteskSemiMonoTrial-Regular';
+  src: url('https://toolsupsidedown.com/font/FKGroteskSemiMonoTrial-Regular.woff') format('woff');
+  src: url('https://toolsupsidedown.com/font/FKGroteskSemiMonoTrial-Regular.woff2') format('woff2');
+}
+
+
+/* text: drag color ================================================ */
+
+::selection {
+  color: white;
+  background: black;
+}
+
+::-moz-selection { /* Code for Firefox */
+  color: white;
+  background: black;
+}
+
+
+/* Textarea ================================================ */
+
