@@ -1,0 +1,34 @@
+/* Variable ================================================ */
+
+:root {
+  --scrollbar-width: 20px;
+  --scrollbar-right: 0px;
+  --scrollbar-left: 17px;
+}
+
+
+/* Scrollbar ================================================ */
+
+::-webkit-scrollbar { /* width */
+  width: var(--scrollbar-width);
+}
+::-webkit-scrollbar-track { /* Track */
+  background: transparent;
+}
+::-webkit-scrollbar-thumb { /* Handle */
+  background: rgb(0,0,0,1);
+  background-clip: padding-box;
+  border-top: 0px solid transparent;
+  border-right: var(--scrollbar-right) solid transparent;
+  border-bottom: 0px solid transparent;
+  border-left: var(--scrollbar-left) solid transparent;
+}
+::-webkit-scrollbar-thumb:active { /* Handle on hover */
+  /* background: rgb(0,0,0,0.24);
+  border-radius: 20px;
+  background-clip: padding-box;
+  border: 5px solid transparent; */
+}
+
+
+

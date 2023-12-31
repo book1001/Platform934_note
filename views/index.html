@@ -1,0 +1,229 @@
+<html lang="en">
+  <head>
+    <title>Welcome to Glitch!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <base target="_blank">
+    
+    <!-- css -->
+<!--     <link rel="stylesheet" href="font.css"> -->
+    
+    <style>
+      @font-face {
+        font-family: 'FKGroteskMonoTrial-Regular';
+        src: url('https://toolsupsidedown.com/font/FKGroteskMonoTrial-Regular.woff') format('woff');
+        src: url('https://toolsupsidedown.com/font/FKGroteskMonoTrial-Regular.woff2') format('woff2');
+      }
+
+      @font-face {
+        font-family: 'FKGroteskSemiMonoTrial-Regular';
+        src: url('https://toolsupsidedown.com/font/FKGroteskSemiMonoTrial-Regular.woff') format('woff');
+        src: url('https://toolsupsidedown.com/font/FKGroteskSemiMonoTrial-Regular.woff2') format('woff2');
+      }
+      
+      /* text: drag color ================================================ */
+
+      ::selection {
+        color: white;
+        background: black;
+      }
+
+      ::-moz-selection { /* Code for Firefox */
+        color: white;
+        background: black;
+      }
+
+      
+      :root {
+        --scrollbar-width: 0px;
+        --scrollbar-right: 0px;
+        --scrollbar-left: 0px;
+/*         --scrollbar-width: 20px;
+        --scrollbar-right: 0px;
+        --scrollbar-left: 17px; */
+      }
+
+      
+      body {
+        margin: 0;
+        padding: 0;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+/*         background: #00c55d; */
+      }
+
+      .flex {
+        display: flex;
+        flex-flow: column;
+        height: 100%;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      
+      textarea {
+        height: 100%;
+        width: 100%;
+        resize: none;
+        border: none;
+        padding: 1px 0 0 20px;
+        font-family: FKGroteskMonoTrial-Regular,sans-serif;
+        color: #000000;
+        font-size: 14.4px;
+        letter-spacing: 0.027em;
+        background: transparent;
+        outline: none;
+      }
+      textarea::placeholder {
+        color: rgba(255, 255, 255, 0.8);
+      }
+      
+      .block {
+        overflow: hidden;
+      }
+      
+      textarea::selection {
+        color: white;
+        background: black;
+      }
+
+      textarea::-moz-selection { /* Code for Firefox */
+        color: white;
+        background: black;
+      }
+      .count {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        padding: 20px 0 16px 20px;
+        pointer-events: none;
+        font-size: 14.4px;
+        color: #000000;
+        font-family: FKGroteskMonoTrial-Regular,sans-serif;
+        font-size: 14.4px;
+        letter-spacing: 0.027em;
+        text-transform: uppercase;
+        font-weight: normal;
+/*         background: linear-gradient(0deg, rgba(0,197,93,1) 0%, rgba(0,197,93,1) 50%, rgba(0,197,93,0) 100%);     */
+      }
+      
+      #online {
+        margin-left: 6px;
+      }
+
+
+      textarea::-webkit-scrollbar { /* width */
+        width: var(--scrollbar-width);
+      }
+      textarea::-webkit-scrollbar-track { /* Track */
+        background: transparent;
+      }
+      textarea::-webkit-scrollbar-thumb { /* Handle */
+        background: rgb(0,0,0,1);
+        background-clip: padding-box;
+        border-top: 0px solid transparent;
+        border-right: var(--scrollbar-right) solid transparent;
+        border-bottom: 0px solid transparent;
+        border-left: var(--scrollbar-left) solid transparent;
+      }
+      textarea::-webkit-scrollbar-thumb:active { /* Handle on hover */
+        /* background: rgb(0,0,0,0.24);
+        border-radius: 20px;
+        background-clip: padding-box;
+        border: 5px solid transparent; */
+      }
+    </style>
+
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"
+      integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I="
+      crossorigin="anonymous"
+    ></script>
+    
+    <script>
+      window.onload = function() {
+        (function() {
+          var socket = io();
+          let textarea = document.getElementById("text");
+          textarea.addEventListener("keydown", e => {
+            // if (e.key == "Enter") e.preventDefault();
+          });
+          textarea.oninput = function() {
+            // textarea.value = textarea.value.replace(/\n/gi, "");
+            socket.emit("new_data", textarea.value);
+          };
+          textarea.addEventListener("paste", e => {
+            // e.preventDefault();
+          });
+          textarea.addEventListener("selectionstart", e => {
+            // e.preventDefault();
+          });
+          socket.on("new_data", function(data) {
+            textarea.value = data;
+          });
+          
+          socket.on("online", function(online) {
+            // document.getElementById("online").innerHTML = online;
+
+            // const people = '༼⍢༽'.repeat(online);
+            // document.getElementById("online").innerHTML = people;
+            
+            // const emojis = ['༼∵༽','༼⍨༽','༼⍢༽','༼⍤༽'];
+            // const emojis = ['🦨 ','🦔 ','🐿 '];
+            // let people = '';
+            // for (let i = 0; i < online; i++) {
+            //     const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+            //     people += randomEmoji;
+            // }
+            
+            const emojis = ['emoji-skunk.png', 'emoji-hedgehog.png', 'emoji-chipmunk.png'];
+            const emojisPath = 'https://gardeninthe.net/icon/';
+            let people = '';
+
+            for (let i = 0; i < online; i++) {
+                const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+                const imageUrl = `${emojisPath}${randomEmoji}`;
+                people += `<img src="${imageUrl}" alt="User Image" style="width: 15px; height: 15px; vertical-align: text-top;"><span> </span></div>`;
+            }
+            document.getElementById("online").innerHTML = people;
+            
+          });
+          
+//           if (self.name != "reload") {
+//             console.log("reload");
+            
+//             self.name = "reload";
+//             self.location.reload(true);
+//           }
+//           else {
+//             self.name = "";
+//           }
+        })();
+      };
+    </script>
+  </head>
+  
+  
+  <body>
+    <div class="flex">
+      <div class="flex block">
+        <textarea id="text" placeholder=""></textarea>
+        <div class="count">
+          Currently:<span id="online"></span>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+</html>
